@@ -19,12 +19,17 @@ function createGameBoard() {
     for (let i = 0; i <= 8; i++) {
         let gridSquare = document.createElement("div");
         gridSquare.setAttribute("id", `${i}`);
+        gridSquare.setAttribute("class", "gameSquare")
         gridSquare.innerText = `${i}`;
 
         gameArea.append(gridSquare);
         console.log(`Creating Grid! Square ${i} created!`);
     }
 }
+
+function checkGameBoard() {
+}
+
 
 function createScoreBoard() {
     let scoreArea = document.getElementById("scoreBoard")
@@ -50,6 +55,7 @@ function createScoreBoard() {
     playerScore.innerText = 'Placeholder Player Score'
     cpuScore.innerText = 'Placeholder CPU Score'
 }
+
 
 createScoreBoard();
 createGameBoard();
