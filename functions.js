@@ -27,8 +27,30 @@ function createGameBoard() {
 }
 
 function createScoreBoard(p1Name, p2Name) {
-    p1.name = p1Name;
-    p2.name = p2Name;
+    let scoreArea = document.getElementById("scoreBoard")
+    p1Name = p1.name;
+    p2Name = p2.name;
+
+    for (let i = 0; i <= 3; i++) {
+        let textArea = document.createElement("div");
+        textArea.setAttribute("id", `${i}`);
+        textArea.innerText = `${i}`;
+
+        scoreArea.append(textArea);
+        console.log(`Creating Grid! Square ${i} created!`);
+    }
+
+    let playerName = document.getElementById("0")
+    let cpuName = document.getElementById("2")
+    let playerScore = document.getElementById("1")
+    let cpuScore = document.getElementById("3")
+
+    playerName.innerText = p1.name;
+    cpuName.innerText = p2.name
+    playerScore.innerText = 'Placeholder Player Score'
+    cpuScore.innerText = 'Placeholder CPU Score'
 }
+
+createScoreBoard();
 
 createGameBoard();
