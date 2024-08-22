@@ -26,7 +26,7 @@ function createGameBoard() {
     }
 }
 
-function createScoreBoard(p1Name, p2Name) {
+function createScoreBoard() {
     let scoreArea = document.getElementById("scoreBoard")
     p1Name = p1.name;
     p2Name = p2.name;
@@ -52,5 +52,4 @@ function createScoreBoard(p1Name, p2Name) {
 }
 
 createScoreBoard();
-
 createGameBoard();
