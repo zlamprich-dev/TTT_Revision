@@ -1,5 +1,3 @@
-// Store current player
-// Or whichever player starts the game
 
 function createPlayers(name, number) {
     const player = {
@@ -13,8 +11,11 @@ function createPlayers(name, number) {
     return player;
 }
 
-const p1 = createPlayers("Zach", 1);
-const p2 = createPlayers("CPU", 2);
+let player1Name = prompt("Please Enter Player 1's Name: ");
+let player2Name = prompt("Please Enter Player 2's Name: ");
+
+const p1 = createPlayers(player1Name, 1);
+const p2 = createPlayers(player2Name, 2);
 
 let currentPlayer = p1;
 const gameBoard = (function () {
@@ -26,12 +27,11 @@ const gameBoard = (function () {
         gridSquare.setAttribute("id", `${i}`);
         gridSquare.setAttribute("class", "gameSquare");
         gridSquare.addEventListener('click', makePlayersMove);
-        gridSquare.innerText = `${i}`;
+        gridSquare.innerText = ``;
 
         gameSpaces[i] = gridSquare; // Stores the DOM element itself instead of the text content
 
         gameArea.append(gridSquare);
-        console.log(`Creating Grid! Square ${i} created!`);
     }
 
     return gameSpaces;
@@ -45,26 +45,28 @@ const scoreBoardCreate = (function () {
     for (let i = 0; i <= 3; i++) {
         let textArea = document.createElement("div");
         textArea.setAttribute("id", `${i}`);
-        textArea.innerText = `${i}`;
+        textArea.innerText = ``;
 
         scoreArea.append(textArea);
-        console.log(`Creating Grid! Scoreboard ${i} created!`);
     }
 
     let playerName = document.getElementById("0");
-    let cpuName = document.getElementById("2");
+    let altPlayerName = document.getElementById("2");
     let playerScore = document.getElementById("1");
-    let cpuScore = document.getElementById("3");
+    let altPlayerScore = document.getElementById("3");
 
     playerName.innerText = p1.name;
-    cpuName.innerText = p2.name;
-    playerScore.innerText = 'Placeholder Player Score';
-    cpuScore.innerText = 'Placeholder CPU Score';
+    altPlayerName.innerText = p2.name;
+    playerScore.innerText = `${p1.name}'s Score: `;
+    altPlayerScore.innerText = `${p2.name}'s Score: `;
 })();
 
 function checkPlayer() {
     if (currentPlayer === p1) {
         console.log(`${p1.name}'s turn!`);
+    } else if (currentPlayer === p2) {
+        console.log(`${p2.name}'s turn!`);
+
     }
 }
 
