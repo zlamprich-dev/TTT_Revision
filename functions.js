@@ -1,8 +1,9 @@
 
-function createPlayers(name, number) {
+function createPlayers(name, number, score) {
     const player = {
         name: name,
         playerNumber: number,
+        score: score,
         talk: function () {
             console.log(name + ` has been assigned: Player ${this.playerNumber}`);
         }
@@ -14,8 +15,8 @@ function createPlayers(name, number) {
 let player1Name = prompt("Please Enter Player 1's Name: ");
 let player2Name = prompt("Please Enter Player 2's Name: ");
 
-const p1 = createPlayers(player1Name, 1);
-const p2 = createPlayers(player2Name, 2);
+const p1 = createPlayers(player1Name, 1, 0);
+const p2 = createPlayers(player2Name, 2, 0);
 
 let currentPlayer = p1;
 const gameBoard = (function () {
@@ -44,21 +45,21 @@ const scoreBoardCreate = (function () {
 
     for (let i = 0; i <= 3; i++) {
         let textArea = document.createElement("div");
-        textArea.setAttribute("id", `${i}`);
+        textArea.setAttribute("id", `Score ${i}`);
         textArea.innerText = ``;
 
         scoreArea.append(textArea);
     }
 
-    let playerName = document.getElementById("0");
-    let altPlayerName = document.getElementById("2");
-    let playerScore = document.getElementById("1");
-    let altPlayerScore = document.getElementById("3");
+    let playerName = document.getElementById("Score 0");
+    let altPlayerName = document.getElementById("Score 2");
+    let playerScore = document.getElementById("Score 1");
+    let altPlayerScore = document.getElementById("Score 3");
 
     playerName.innerText = p1.name;
     altPlayerName.innerText = p2.name;
-    playerScore.innerText = `${p1.name}'s Score: `;
-    altPlayerScore.innerText = `${p2.name}'s Score: `;
+    playerScore.innerText = p1.score;
+    altPlayerScore.innerText = p2.score;
 })();
 
 function checkPlayer() {
@@ -71,6 +72,7 @@ function checkPlayer() {
 }
 
 function checkWinConditions() {
+
     const winPatterns = [
         [0, 1, 2], // Row 1
         [3, 4, 5], // Row 2
@@ -88,9 +90,18 @@ function checkWinConditions() {
             gameBoard[a].textContent === gameBoard[b].textContent &&
             gameBoard[a].textContent === gameBoard[c].textContent) {
             console.log(`${gameBoard[a].textContent} wins!`);
-            return;
+
+
+            if (gameBoard[a].textContent === `X`) {
+                p1.score++
+                document.getElementById("Score 1").innerText = p1.score
+            } if (gameBoard[a].textContent === `O`) {
+                p2.score++
+                document.getElementById("Score 3").innerText = p2.score 
+            }
         }
     }
+
 }
 
 function makePlayersMove(event) {
@@ -102,4 +113,5 @@ function makePlayersMove(event) {
     checkWinConditions();
     currentPlayer = currentPlayer === p1 ? p2 : p1; // Switch player on move
     checkPlayer(); // Update player turn info
+
 }
